@@ -10,7 +10,7 @@ pub mod willard {
 	}
     }
 
-    pub mod Gate {
+    pub mod gate {
 	use crate::willard::Qubit;
 
 	pub fn not(qubit: &mut Qubit) {
@@ -33,7 +33,7 @@ pub mod willard {
 	fn test_not() {
 	    let mut qubit = Qubit::default();
 
-	    Gate::not(&qubit);
+	    gate::not(&mut qubit);
 
 	    assert_eq!(qubit.state, [0.0, 1.0]);
 	    assert_eq!(qubit.phase, 0.0);
