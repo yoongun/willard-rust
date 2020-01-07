@@ -1,9 +1,11 @@
 mod willard {
     struct Qubit{
+	state: [f32; 2],
+	phase: f32
     }
 
     impl Default for Qubit {
-	fn default -> Qubit {
+	fn default() -> Qubit {
 	    Qubit{state: [1.0, 0.0], phase: 0.0}
 	}
     }
