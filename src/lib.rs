@@ -1,4 +1,4 @@
-mod willard {
+pub mod willard {
     pub struct Qubit{
 	state: [f32; 2],
 	phase: f32
@@ -7,6 +7,13 @@ mod willard {
     impl Default for Qubit {
 	fn default() -> Qubit {
 	    Qubit{state: [1.0, 0.0], phase: 0.0}
+	}
+    }
+
+    pub mod Gate {
+	use crate::willard::Qubit;
+
+	pub fn not(qubit: &mut Qubit) {
 	}
     }
 
@@ -24,9 +31,9 @@ mod willard {
 
 	#[test]
 	fn test_not() {
-	    let qubit = Qubit::default();
+	    let mut qubit = Qubit::default();
 
-	    Gate::not(qubit);
+	    Gate::not(&qubit);
 
 	    assert_eq!(qubit.state, [0.0, 1.0]);
 	    assert_eq!(qubit.phase, 0.0);
