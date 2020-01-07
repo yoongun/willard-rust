@@ -1,5 +1,6 @@
 pub mod willard {
     use std::f32;
+    use std::num::Float;
 
     pub struct Qubit{
 	state: [f32; 2],
@@ -21,6 +22,16 @@ pub mod willard {
 	}
 
 	pub fn had(qubit: &mut Qubit) {
+	    let two = 2.0;
+	    let t_sqrt = two.sqrt();
+	    let mat = [[1 / t_sqrt, 1 / t_sqrt],
+		       [1 / t_sqrt, -1 / t_sqrt]];
+	    let mut state: [[f32; 2]; 2];
+	    for row in mat.iter() {
+		state[0] += row[0] * qubit.state[0];
+		state[1] += row[1] * qubit.state[1];
+	    }
+	    qubit.state = state;
 	}
     }
 
