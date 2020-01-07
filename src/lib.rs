@@ -14,6 +14,8 @@ pub mod willard {
 	use crate::willard::Qubit;
 
 	pub fn not(qubit: &mut Qubit) {
+	    let state = qubit.state;
+	    qubit.state = [state[1], state[0]];
 	}
     }
 
