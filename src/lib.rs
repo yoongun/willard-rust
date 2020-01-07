@@ -40,5 +40,20 @@ pub mod willard {
 	    assert_eq!(qubit.state, [0.0, 1.0]);
 	    assert_eq!(qubit.phase, 0.0);
 	}
+
+	#[test]
+	fn test_had() {
+	    // Test on a qubit of state [1.0, 0.0]
+	    let mut qubit0 = Qubit::default();
+
+	    gate::had(&mut qubit0);
+
+	    assert_eq!(qubit0.state, [0.5, 0.5]);
+	    assert_eq!(qubit0.phase, 0.0);
+
+	    // Test on a qubit of state [0.0, 1.0]
+	    let mut qubit1 = Qubit::default();
+	    gate::not(&mut qubit);
+	}
     }
 }
