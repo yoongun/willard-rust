@@ -58,7 +58,7 @@ pub mod willard {
 
 	    // Test on a qubit of state [0.0, 1.0]
 	    let mut qubit1 = Qubit::default();
-	    gate::not(&mut qubit);
+	    gate::not(&mut qubit1);
 
 	    gate::had(&mut qubit1);
 
