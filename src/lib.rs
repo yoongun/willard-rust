@@ -19,6 +19,9 @@ pub mod willard {
 	    let state = qubit.state;
 	    qubit.state = [state[1], state[0]];
 	}
+
+	pub fn had(qubit: &mut Qubit) {
+	}
     }
 
     #[cfg(test)]
@@ -60,7 +63,7 @@ pub mod willard {
 	    gate::had(&mut qubit1);
 
 	    assert_eq!(qubit1.state, [0.5, 0.5]);
-	    assert_eq!(qubit.phase, f32::consts::PI);
+	    assert_eq!(qubit1.phase, f32::consts::PI);
 	}
     }
 }
