@@ -1,4 +1,6 @@
 pub mod willard {
+    use std::f32;
+
     pub struct Qubit{
 	state: [f32; 2],
 	phase: f32
@@ -54,6 +56,11 @@ pub mod willard {
 	    // Test on a qubit of state [0.0, 1.0]
 	    let mut qubit1 = Qubit::default();
 	    gate::not(&mut qubit);
+
+	    gate::had(&mut qubit1);
+
+	    assert_eq!(qubit1.state, [0.5, 0.5]);
+	    assert_eq!(qubit.phase, f32::consts::PI);
 	}
     }
 }
