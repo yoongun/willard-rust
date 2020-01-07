@@ -1,5 +1,5 @@
 mod willard {
-    struct Qubit{
+    pub struct Qubit{
 	state: [f32; 2],
 	phase: f32
     }
