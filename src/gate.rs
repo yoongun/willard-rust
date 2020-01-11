@@ -68,6 +68,22 @@ mod tests {
     }
 
     #[test]
+    fn test_sqrt_not() {
+	let mut qubit = Qubit::default();
+
+	sqrt_not(&mut qubit);
+	sqrt_not(&mut qubit);
+
+	let mut other_qubit = Qubit::default();
+	not(&mut other_qubit);
+
+	let got = qubit.state;
+	let want = other_qubit.state;
+
+	assert_eq!(got, want);
+    }
+
+    #[test]
     fn test_normalize_phase() {
 	let state = (Complex::new(0.0, -1.0), Complex::new(1.0, 0.0));
 	let got = normalize_phase(state);
