@@ -65,10 +65,10 @@ pub mod willard {
 
 	    #[test]
 	    fn test_normalize_phase() {
-		let state = (Complex::new(0.7, -0.7), Complex::new(0.7, 0.0));
+		let state = (Complex::new(0.0, -1.0), Complex::new(1.0, 0.0));
 
 		let got = normalize_phase(state);
-		let want = (0.7, Complex::new(0.7, 0.7));
+		let want = (1.0, Complex::new(0.0, 1.0));
 
 		assert_eq!(got, want);
 	    }
