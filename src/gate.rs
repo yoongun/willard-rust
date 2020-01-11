@@ -18,6 +18,9 @@ pub fn h(qubit: &mut Qubit) {
     qubit.state = normalize_phase(state);
 }
 
+fn sqrt_not(qubit: &mut Qubit) {
+}
+
 fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
     let size = (state.0.conj() * state.0).re.sqrt();
     let d_phase = (state.0 / size).conj();
