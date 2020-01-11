@@ -30,24 +30,30 @@ pub mod willard {
     }
 
     pub mod gate {
-	use crate::willard;
-	use num::complex;
+	use crate::willard::Qubit;
+	use num::complex::Complex;
 
-	pub fn not(qubit: &mut willard::Qubit) {
+	pub fn not(qubit: &mut Qubit) {
 	    let state = qubit.state;
-	    qubit.state = (state.1.re, complex::Complex::new(state.0, -state.1.im));
+	    qubit.state = (state.1.re, Complex::new(state.0, -state.1.im));
 	}
 
-	pub fn h(qubit: &mut willard::Qubit) {
+	pub fn h(qubit: &mut Qubit) {
 	    let root_two = (2.0 as f32).sqrt();
 	    let mat = [[1.0 / root_two, 1.0 / root_two],
 		       [1.0 / root_two, -1.0 / root_two]];
-	    let mut state: (f32, complex::Complex<f32>)= (0.0, complex::Complex::new(0.0, 0.0);
+	    let mut state: (Complex<f32>, Complex<f32>)= (0.0, Complex::new(0.0, 0.0));
 
 	    state.0 += mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
 	    state.1 += mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
 
-	    qubit.state = state;
+	    qubit.state = normalize_phase(state);
+	}
+
+	fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
+	    let a = (state.0.conj() * state.1).re;
+	    let b = state.0 * state.1;
+	    (a, b)
 	}
     }
 
