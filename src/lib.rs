@@ -3,12 +3,11 @@ pub mod willard {
 
     pub struct Qubit{
 	state: [f32; 2],
-	phase: f32
     }
 
     impl Default for Qubit {
 	fn default() -> Qubit {
-	    Qubit{state: [1.0, 0.0], phase: 0.0}
+	    Qubit{state: [1.0, 0.0]}
 	}
     }
 
@@ -42,7 +41,6 @@ pub mod willard {
 	    let qubit = Qubit::default();
 
 	    assert_eq!(qubit.state, [1.0, 0.0]);
-	    assert_eq!(qubit.phase, 0.0);
 	}
 
 	#[test]
@@ -52,7 +50,6 @@ pub mod willard {
 	    gate::not(&mut qubit);
 
 	    assert_eq!(qubit.state, [0.0, 1.0]);
-	    assert_eq!(qubit.phase, 0.0);
 	}
 
 	#[test]
@@ -67,11 +64,7 @@ pub mod willard {
 	    let got_state = qubit0.state;
 	    let want_state = [1.0 / root_two, 1.0 / root_two];
 
-	    let got_phase = qubit0.phase;
-	    let want_phase = 0.0;
-
 	    assert_eq!(got_state, want_state);
-	    assert_eq!(got_phase, want_phase);
 
 	    // Test on a qubit of state [0.0, 1.0]
 	    let mut qubit1 = Qubit::default();
@@ -79,8 +72,10 @@ pub mod willard {
 
 	    gate::h(&mut qubit1);
 
-	    assert_eq!(qubit1.state, [1.0 / root_two, -1.0 / root_two]);
-	    assert_eq!(qubit1.phase, f32::consts::PI);
+	    let got_state = qubit1.state;
+	    let want_state = [1.0 / root_two, -1.0 / root_two];
+
+	    assert_eq!(got_state, want_state);
 	}
     }
 }
