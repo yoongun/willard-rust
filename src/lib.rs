@@ -44,16 +44,16 @@ pub mod willard {
 		       [1.0 / root_two, -1.0 / root_two]];
 	    let mut state: (Complex<f32>, Complex<f32>)= (Complex::new(0.0, 0.0), Complex::new(0.0, 0.0));
 
-	    state.0 += mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
-	    state.1 += mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
+	    state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
+	    state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
 
 	    qubit.state = normalize_phase(state);
 	}
 
 	fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
-	    let a = (state.0.conj() * state.1).re;
-	    let b = state.0 * state.1;
-	    (a, b)
+	    let l = (state.0.conj() * state.1).re;
+	    let r = state.0 * state.1;
+	    (l, r)
 	}
     }
 
