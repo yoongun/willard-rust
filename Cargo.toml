@@ -5,6 +5,7 @@ authors = ["Yoon Gun <cfr2ak@gmail.com>"]
 edition = "2018"
 description = "Single Qubit simulatior with quantum gates implemention"
 repository = "https://github.com/cfr2ak/willard/tree/master"
+license-file="LICENSE"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
