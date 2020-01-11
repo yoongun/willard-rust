@@ -33,14 +33,6 @@ mod tests {
     use num::complex::Complex;
 
     #[test]
-    fn test_normalize_phase() {
-	let state = (Complex::new(0.0, -1.0), Complex::new(1.0, 0.0));
-	let got = normalize_phase(state);
-	let want = (1.0, Complex::new(0.0, 1.0));
-	assert_eq!(got, want);
-    }
-
-    #[test]
     fn test_not() {
 	let mut qubit = Qubit::default();
 
@@ -72,6 +64,14 @@ mod tests {
 	let got = qubit1.state;
 	let want = (1.0 / root_two, Complex{re: -1.0 / root_two, im: 0.0});
 
+	assert_eq!(got, want);
+    }
+
+    #[test]
+    fn test_normalize_phase() {
+	let state = (Complex::new(0.0, -1.0), Complex::new(1.0, 0.0));
+	let got = normalize_phase(state);
+	let want = (1.0, Complex::new(0.0, 1.0));
 	assert_eq!(got, want);
     }
 }
