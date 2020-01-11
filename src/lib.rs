@@ -5,15 +5,15 @@ extern crate num;
 pub mod willard {
     use std::f32;
     use rand::Rng;
-    use num::complex;
+    use num::complex::Complex;
 
     pub struct Qubit{
-	state: (f32, complex::Complex<f32>),
+	state: (f32, Complex<f32>),
     }
 
     impl Default for Qubit {
 	fn default() -> Qubit {
-	    Qubit{state: (1.0, complex::Complex::new(0.0, 0.0))}
+	    Qubit{state: (1.0, Complex::new(0.0, 0.0))}
 	}
     }
 
@@ -22,10 +22,10 @@ pub mod willard {
 	let rn = rng.gen::<f32>();
 
 	if rn < qubit.state.0.powf(2.0) {
-	    qubit.state = (1.0, complex::Complex::new(0.0, 0.0));
+	    qubit.state = (1.0, Complex::new(0.0, 0.0));
 	    return 0;
 	}
-	qubit.state = (0.0, complex::Complex::new(1.0, 0.0));
+	qubit.state = (0.0, Complex::new(1.0, 0.0));
 	return 1;
     }
 
@@ -70,12 +70,13 @@ pub mod willard {
     #[cfg(test)]
     mod tests {
 	use super::*;
+	use num::complex::Complex;
 	
 	#[test]
 	fn test_qubit_init() {
 	    let qubit = Qubit::default();
 
-	    assert_eq!(qubit.state, [1.0, 0.0]);
+	    assert_eq!(qubit.state, (1.0, Complex::<f32>(0.0, 0.0)));
 	}
 
 	#[test]
