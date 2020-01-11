@@ -13,7 +13,7 @@ pub mod willard {
 
     impl Default for Qubit {
 	fn default() -> Qubit {
-	    Qubit{state: [1.0, 0.0]}
+	    Qubit{state: (1.0, complex::Complex::new(0.0, 0.0))}
 	}
     }
 
@@ -22,31 +22,32 @@ pub mod willard {
 	    let mut rng = rand::thread_rng();
 	    let rn = rng.gen::<f32>();
 
-	    if rn < qubit.state[0].powf(2.0) {
-		qubit.state = [1.0, 0.0];
+	    if rn < qubit.state.0.powf(2.0) {
+		qubit.state = (1.0, complex::Complex::new(0.0, 0.0));
 		return 0;
 	    }
-	    qubit.state = [0.0, 1.0];
+	    qubit.state = (0.0, complex::Complex::new(1.0, 0.0));
 	    return 1;
 	}
     }
 
     pub mod gate {
 	use crate::willard;
+	use num::complex;
 
 	pub fn not(qubit: &mut willard::Qubit) {
 	    let state = qubit.state;
-	    qubit.state = [state[1], state[0]];
+	    qubit.state = (state.1.re, complex::Complex::new(state.0, -state.1.im));
 	}
 
 	pub fn h(qubit: &mut willard::Qubit) {
 	    let root_two = (2.0 as f32).sqrt();
 	    let mat = [[1.0 / root_two, 1.0 / root_two],
 		       [1.0 / root_two, -1.0 / root_two]];
-	    let mut state: [f32; 2] = [0.0, 0.0];
+	    let mut state: (f32, complex::Complex<f32>)= (0.0, complex::Complex::new(0.0, 0.0);
 
-	    state[0] += mat[0][0] * qubit.state[0] + mat[0][1] * qubit.state[1];
-	    state[1] += mat[1][0] * qubit.state[0] + mat[1][1] * qubit.state[1];
+	    state.0 += mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
+	    state.1 += mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
 
 	    qubit.state = state;
 	}
