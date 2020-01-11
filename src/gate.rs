@@ -67,6 +67,14 @@ mod tests {
     }
 
     #[test]
+    fn test_y() {
+    }
+
+    #[test]
+    fn test_z() {
+    }
+
+    #[test]
     fn test_not() {
 	let mut qubit = Qubit::default();
 	not(&mut qubit);
