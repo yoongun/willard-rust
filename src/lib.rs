@@ -51,8 +51,6 @@ mod tests {
 	assert_eq!(qubit.state, (1.0, Complex{re: 0.0, im: 0.0}));
     }
 
-    
-
     #[test]
     fn test_collapes_of_state() {
 	use crate::gate;
