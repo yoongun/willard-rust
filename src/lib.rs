@@ -76,7 +76,7 @@ pub mod willard {
 	fn test_qubit_init() {
 	    let qubit = Qubit::default();
 
-	    assert_eq!(qubit.state, (1.0, Complex::<f32>(0.0, 0.0)));
+	    assert_eq!(qubit.state, (1.0, Complex{re: 0.0, im: 0.0}));
 	}
 
 	#[test]
