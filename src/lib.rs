@@ -17,18 +17,16 @@ pub mod willard {
 	}
     }
 
-    impl Qubit {
-	fn measure(qubit: &mut Qubit) -> u32 {
-	    let mut rng = rand::thread_rng();
-	    let rn = rng.gen::<f32>();
+    fn measure(qubit: &mut Qubit) -> u32 {
+	let mut rng = rand::thread_rng();
+	let rn = rng.gen::<f32>();
 
-	    if rn < qubit.state.0.powf(2.0) {
-		qubit.state = (1.0, complex::Complex::new(0.0, 0.0));
-		return 0;
-	    }
-	    qubit.state = (0.0, complex::Complex::new(1.0, 0.0));
-	    return 1;
+	if rn < qubit.state.0.powf(2.0) {
+	    qubit.state = (1.0, complex::Complex::new(0.0, 0.0));
+	    return 0;
 	}
+	qubit.state = (0.0, complex::Complex::new(1.0, 0.0));
+	return 1;
     }
 
     pub mod gate {
@@ -59,7 +57,7 @@ pub mod willard {
 	pub fn qrn() -> u32 {
 	    let mut qubit = willard::Qubit::default();
 	    willard::gate::h(&mut qubit);
-	    return willard::Qubit::measure(&mut qubit);
+	    return willard::measure(&mut qubit);
 	}
     }
 
@@ -115,10 +113,10 @@ pub mod willard {
 
 	    gate::h(&mut qubit);
 
-	    let want = Qubit::measure(&mut qubit);
+	    let want = measure(&mut qubit);
 
 	    for _n in 0..100 {
-		let got = Qubit::measure(&mut qubit);
+		let got = measure(&mut qubit);
 		assert_eq!(got, want);
 	    }
 	}
