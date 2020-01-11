@@ -6,10 +6,26 @@ pub fn x(qubit: &mut Qubit) {
 }
 
 pub fn y(qubit: &mut Qubit) {
+    let mat = [[Complex::new(0.0, 0.0), Complex::new(0.0, -1.0)],
+	       [Complex::new(0.0, 1.0), Complex::new(0.0, 0.0)]];
+    let mut state: (Complex<f32>, Complex<f32>)= (Complex::new(0.0, 0.0), Complex::new(0.0, 0.0));
 
+    state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
+    state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
+
+    qubit.state = normalize_phase(state);
 }
 
 pub fn z(qubit: &mut Qubit) {
+    let mat = [[1.0, 0.0],
+	       [0.0, -1.0]];
+    let mut state: (Complex<f32>, Complex<f32>)= (Complex::new(0.0, 0.0), Complex::new(0.0, 0.0));
+
+    state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
+    state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
+
+    qubit.state = normalize_phase(state);
+
 }
 
 pub fn not(qubit: &mut Qubit) {
@@ -42,8 +58,7 @@ pub fn sqrt_not(qubit: &mut Qubit) {
 
 fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
     if (state.0 == Complex{re: 0.0, im: 0.0}) {
-	return (0.0,
-		Complex::new(1.0, 0.0));
+	return (0.0, Complex::new(1.0, 0.0));
     }
 
     let size = (state.0.conj() * state.0).re.sqrt();
