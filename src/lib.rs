@@ -1,12 +1,14 @@
 extern crate rand;
+extern crate num;
 
 
 pub mod willard {
     use std::f32;
     use rand::Rng;
+    use num::complex;
 
     pub struct Qubit{
-	state: [f32; 2],
+	state: (f32, complex::Complex<f32>),
     }
 
     impl Default for Qubit {
