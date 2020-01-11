@@ -1,6 +1,10 @@
 use crate::Qubit;
 use num::complex::Complex;
 
+pub fn x(qubit: &mut Qubit) {
+    not(qubit);
+}
+
 pub fn not(qubit: &mut Qubit) {
     let state = qubit.state;
     qubit.state = (state.1.re, Complex::new(state.0, -state.1.im));
