@@ -68,10 +68,16 @@ mod tests {
 
     #[test]
     fn test_y() {
+	let mut qubit = Qubit::default();
+	y(&mut qubit);
+	assert_eq!(qubit.state, (0.0, Complex{re: 1.0, im: 0.0}));
     }
 
     #[test]
     fn test_z() {
+	let mut qubit = Qubit::default();
+	z(&mut qubit);
+	assert_eq!(qubit.state, (1.0, Complex{re: 0.0, im: 0.0}));
     }
 
     #[test]
