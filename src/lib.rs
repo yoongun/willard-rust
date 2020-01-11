@@ -62,8 +62,10 @@ pub mod willard {
 
 	    gate::h(&mut qubit0);
 
+	    let root_two = (2.0 as f32).sqrt();
+
 	    let got_state = qubit0.state;
-	    let want_state = [];
+	    let want_state = [1.0 / root_two, 1.0 / root_two];
 
 	    let got_phase = qubit0.phase;
 	    let want_phase = 0.0;
@@ -77,7 +79,7 @@ pub mod willard {
 
 	    gate::h(&mut qubit1);
 
-	    assert_eq!(qubit1.state, [0.5, 0.5]);
+	    assert_eq!(qubit1.state, [1.0 / root_two, -1.0 / root_two]);
 	    assert_eq!(qubit1.phase, f32::consts::PI);
 	}
     }
