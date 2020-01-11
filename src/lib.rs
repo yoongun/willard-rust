@@ -85,7 +85,7 @@ pub mod willard {
 
 	    gate::not(&mut qubit);
 
-	    assert_eq!(qubit.state, [0.0, 1.0]);
+	    assert_eq!(qubit.state, (0.0, Complex{re: 1.0, im: 0.0}));
 	}
 
 	#[test]
@@ -97,10 +97,10 @@ pub mod willard {
 
 	    let root_two = (2.0 as f32).sqrt();
 
-	    let got_state = qubit0.state;
-	    let want_state = [1.0 / root_two, 1.0 / root_two];
+	    let got = qubit0.state;
+	    let want = (1.0 / root_two, Complex{re: 1.0 / root_two, im: 0.0});
 
-	    assert_eq!(got_state, want_state);
+	    assert_eq!(got, want);
 
 	    // Test on a qubit of state [0.0, 1.0]
 	    let mut qubit1 = Qubit::default();
@@ -108,10 +108,10 @@ pub mod willard {
 
 	    gate::h(&mut qubit1);
 
-	    let got_state = qubit1.state;
-	    let want_state = [1.0 / root_two, -1.0 / root_two];
+	    let got = qubit1.state;
+	    let want = (1.0 / root_two, Complex{re: -1.0 / root_two, im: 0.0});
 
-	    assert_eq!(got_state, want_state);
+	    assert_eq!(got, want);
 	}
 
 	#[test]
