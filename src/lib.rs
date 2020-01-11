@@ -21,8 +21,7 @@ pub mod willard {
 	}
 
 	pub fn h(qubit: &mut Qubit) {
-	    let two = 2.0_f32;
-	    let root_two = two.sqrt();
+	    let root_two = (2.0 as f32).sqrt();
 	    let mat = [[1.0 / root_two, 1.0 / root_two],
 		       [1.0 / root_two, -1.0 / root_two]];
 	    let mut state: [f32; 2] = [0.0, 0.0];
@@ -69,7 +68,7 @@ pub mod willard {
 	    let got_phase = qubit0.phase;
 	    let want_phase = 0.0;
 
-	    assert_eq!(qubit0.state, [0.5, 0.5]);
+	    assert_eq!(got_state, want_state);
 	    assert_eq!(got_phase, want_phase);
 
 	    // Test on a qubit of state [0.0, 1.0]
