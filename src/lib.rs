@@ -12,14 +12,14 @@ pub mod willard {
     }
 
     pub mod gate {
-	use crate::willard::Qubit;
+	use crate::willard;
 
-	pub fn not(qubit: &mut Qubit) {
+	pub fn not(qubit: &mut willard::Qubit) {
 	    let state = qubit.state;
 	    qubit.state = [state[1], state[0]];
 	}
 
-	pub fn h(qubit: &mut Qubit) {
+	pub fn h(qubit: &mut willard::Qubit) {
 	    let root_two = (2.0 as f32).sqrt();
 	    let mat = [[1.0 / root_two, 1.0 / root_two],
 		       [1.0 / root_two, -1.0 / root_two]];
