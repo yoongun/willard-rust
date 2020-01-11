@@ -53,11 +53,16 @@ mod tests {
     use num::complex::Complex;
 
     #[test]
+    fn test_x() {
+	let mut qubit = Qubit::default();
+	x(&mut qubit);
+	assert_eq!(qubit.state, (0.0, Complex{re: 1.0, im: 0.0}));
+    }
+
+    #[test]
     fn test_not() {
 	let mut qubit = Qubit::default();
-
 	not(&mut qubit);
-
 	assert_eq!(qubit.state, (0.0, Complex{re: 1.0, im: 0.0}));
     }
 
