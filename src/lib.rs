@@ -1,5 +1,9 @@
+extern crate rand;
+
+
 pub mod willard {
     use std::f32;
+    use rand::Rng;
 
     pub struct Qubit{
 	state: [f32; 2],
@@ -47,7 +51,7 @@ pub mod willard {
 	use super::*;
 	
 	#[test]
-	fn test_qubit() {
+	fn test_qubit_init() {
 	    let qubit = Qubit::default();
 
 	    assert_eq!(qubit.state, [1.0, 0.0]);
@@ -87,5 +91,20 @@ pub mod willard {
 
 	    assert_eq!(got_state, want_state);
 	}
+
+	#[test]
+	fn test_collapes_of_state() {
+	    let mut qubit = Qubit::default();
+
+	    gate::h(&mut qubit);
+
+	    let want = Qubit::measure(&mut qubit);
+
+	    for _n in 0..100 {
+		let got = Qubit::measure(&mut qubit);
+		assert_eq!(got, want);
+	    }
+	}
+
     }
 }
