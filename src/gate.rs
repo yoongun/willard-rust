@@ -18,7 +18,15 @@ pub fn h(qubit: &mut Qubit) {
     qubit.state = normalize_phase(state);
 }
 
-fn sqrt_not(qubit: &mut Qubit) {
+pub fn sqrt_not(qubit: &mut Qubit) {
+    let mat = [[Complex::new(1.0, 1.0) / 2.0, Complex::new(1.0, -1.0) / 2.0],
+	       [Complex::new(1.0, -1.0) / 2.0, Complex::new(1.0, 1.0) / 2.0]];
+    let mut state: (Complex<f32>, Complex<f32>)= (Complex::new(0.0, 0.0), Complex::new(0.0, 0.0));
+
+    state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
+    state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
+
+    qubit.state = normalize_phase(state);
 }
 
 fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
