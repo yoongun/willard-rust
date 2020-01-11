@@ -32,6 +32,16 @@ pub mod willard {
 	}
     }
 
+    pub mod alg {
+	use crate::willard;
+
+	pub fn qrn() -> u32 {
+	    let qubit = willard::Qubit::default();
+	    willard::gate::h(qubit);
+	    return qubit.read();
+	}
+    }
+
     #[cfg(test)]
     mod tests {
 	use super::*;
