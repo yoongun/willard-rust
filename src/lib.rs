@@ -51,9 +51,27 @@ pub mod willard {
 	}
 
 	fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
-	    let l = (state.0.conj() * state.1).re;
-	    let r = state.0 * state.1;
+	    let size = (state.0.conj() * state.0).re.sqrt();
+	    let d_phase = (state.0 / size).conj();
+
+	    let l = (d_phase * state.0).re;
+	    let r = d_phase * state.1;
 	    (l, r)
+	}
+
+	#[cfg(test)]
+	mod tests {
+	    use super::*;
+
+	    #[test]
+	    fn test_normalize_phase() {
+		let state = (Complex::new(0.7, -0.7), Complex::new(0.7, 0.0));
+
+		let got = normalize_phase(state);
+		let want = (0.7, Complex::new(0.7, 0.7));
+
+		assert_eq!(got, want);
+	    }
 	}
     }
 
