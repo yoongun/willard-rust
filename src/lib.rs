@@ -15,6 +15,11 @@ pub mod willard {
 	}
     }
 
+    impl Qubit {
+	fn measure() {
+	}
+    }
+
     pub mod gate {
 	use crate::willard;
 
@@ -42,7 +47,7 @@ pub mod willard {
 	pub fn qrn() -> u32 {
 	    let qubit = willard::Qubit::default();
 	    willard::gate::h(qubit);
-	    return qubit.read();
+	    return Qubit::measure(&mut qubit);
 	}
     }
 
