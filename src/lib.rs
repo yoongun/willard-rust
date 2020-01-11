@@ -20,7 +20,7 @@ pub mod willard {
 	    qubit.state = [state[1], state[0]];
 	}
 
-	pub fn had(qubit: &mut Qubit) {
+	pub fn h(qubit: &mut Qubit) {
 	    let two = 2.0_f32;
 	    let t_sqrt = two.sqrt();
 	    let mat = [[1.0 / t_sqrt, 1.0 / t_sqrt],
@@ -57,11 +57,11 @@ pub mod willard {
 	}
 
 	#[test]
-	fn test_had() {
+	fn test_h() {
 	    // Test on a qubit of state [1.0, 0.0]
 	    let mut qubit0 = Qubit::default();
 
-	    gate::had(&mut qubit0);
+	    gate::h(&mut qubit0);
 
 	    assert_eq!(qubit0.state, [0.5, 0.5]);
 	    assert_eq!(qubit0.phase, 0.0);
@@ -70,7 +70,7 @@ pub mod willard {
 	    let mut qubit1 = Qubit::default();
 	    gate::not(&mut qubit1);
 
-	    gate::had(&mut qubit1);
+	    gate::h(&mut qubit1);
 
 	    assert_eq!(qubit1.state, [0.5, 0.5]);
 	    assert_eq!(qubit1.phase, f32::consts::PI);
