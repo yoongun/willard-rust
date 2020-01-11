@@ -16,7 +16,16 @@ pub mod willard {
     }
 
     impl Qubit {
-	fn measure() {
+	fn measure(qubit: &mut Qubit) -> u32 {
+	    let mut rng = rand::thread_rng();
+	    let rn = rng.gen::<f32>();
+
+	    if rn < qubit.state[0].powf(2.0) {
+		qubit.state = [1.0, 0.0];
+		return 0;
+	    }
+	    qubit.state = [0.0, 1.0];
+	    return 1;
 	}
     }
 
@@ -45,9 +54,9 @@ pub mod willard {
 	use crate::willard;
 
 	pub fn qrn() -> u32 {
-	    let qubit = willard::Qubit::default();
-	    willard::gate::h(qubit);
-	    return Qubit::measure(&mut qubit);
+	    let mut qubit = willard::Qubit::default();
+	    willard::gate::h(&mut qubit);
+	    return willard::Qubit::measure(&mut qubit);
 	}
     }
 
