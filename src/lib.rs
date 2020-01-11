@@ -22,14 +22,14 @@ pub mod willard {
 
 	pub fn h(qubit: &mut Qubit) {
 	    let two = 2.0_f32;
-	    let t_sqrt = two.sqrt();
-	    let mat = [[1.0 / t_sqrt, 1.0 / t_sqrt],
-		       [1.0 / t_sqrt, -1.0 / t_sqrt]];
-	    let mut state: [f32; 2] = [1.0, 0.0];
-	    for row in mat.iter() {
-		state[0] += row[0] * qubit.state[0];
-		state[1] += row[1] * qubit.state[1];
-	    }
+	    let root_two = two.sqrt();
+	    let mat = [[1.0 / root_two, 1.0 / root_two],
+		       [1.0 / root_two, -1.0 / root_two]];
+	    let mut state: [f32; 2] = [0.0, 0.0];
+
+	    state[0] += mat[0][0] * qubit.state[0] + mat[0][1] * qubit.state[1];
+	    state[1] += mat[1][0] * qubit.state[0] + mat[1][1] * qubit.state[1];
+
 	    qubit.state = state;
 	}
     }
@@ -63,8 +63,14 @@ pub mod willard {
 
 	    gate::h(&mut qubit0);
 
+	    let got_state = qubit0.state;
+	    let want_state = [];
+
+	    let got_phase = qubit0.phase;
+	    let want_phase = 0.0;
+
 	    assert_eq!(qubit0.state, [0.5, 0.5]);
-	    assert_eq!(qubit0.phase, 0.0);
+	    assert_eq!(got_phase, want_phase);
 
 	    // Test on a qubit of state [0.0, 1.0]
 	    let mut qubit1 = Qubit::default();
