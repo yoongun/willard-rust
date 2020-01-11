@@ -32,7 +32,7 @@ pub fn sqrt_not(qubit: &mut Qubit) {
 fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
     if (state.0 == Complex{re: 0.0, im: 0.0}) {
 	return (0.0,
-		Complex::new((state.1.conj() * state.1).re.sqrt(), 0.0));
+		Complex::new(1.0, 0.0));
     }
 
     let size = (state.0.conj() * state.0).re.sqrt();
