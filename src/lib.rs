@@ -21,11 +21,13 @@ fn measure(qubit: &mut Qubit) -> u32 {
     let mut rng = rand::thread_rng();
     let rn = rng.gen::<f32>();
 
-    if rn < qubit.state.0.powf(2.0) {
-	qubit.state = (1.0, Complex::new(0.0, 0.0));
+    let alpha_sq = (qubit.state.0.conj() * qubit.state.0).re;
+
+    if rn < alpha_sq {
+	qubit.state = (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0));
 	return 0;
     }
-    qubit.state = (0.0, Complex::new(1.0, 0.0));
+    qubit.state = (Complex::new(0.0, 0.0), Complex::new(1.0, 0.0));
     return 1;
 }
 

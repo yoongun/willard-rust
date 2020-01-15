@@ -13,7 +13,7 @@ pub fn y(qubit: &mut Qubit) {
     state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
     state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
 
-    qubit.state = normalize_phase(state);
+    qubit.state = state;
 }
 
 pub fn z(qubit: &mut Qubit) {
@@ -28,7 +28,7 @@ pub fn phase(qubit: &mut Qubit, deg: f32) {
     state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
     state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
 
-    qubit.state = normalize_phase(state);
+    qubit.state = state;
 }
 
 pub fn not(qubit: &mut Qubit) {
@@ -45,7 +45,7 @@ pub fn h(qubit: &mut Qubit) {
     state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
     state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
 
-    qubit.state = normalize_phase(state);
+    qubit.state = state;
 }
 
 pub fn sqrt_not(qubit: &mut Qubit) {
@@ -56,7 +56,7 @@ pub fn sqrt_not(qubit: &mut Qubit) {
     state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
     state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
 
-    qubit.state = normalize_phase(state);
+    qubit.state = state;
 }
 
 fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
@@ -81,7 +81,7 @@ mod tests {
     fn test_x() {
 	let mut qubit = Qubit::default();
 	x(&mut qubit);
-	assert_eq!(qubit.state, (0.0, Complex{re: 1.0, im: 0.0}));
+	assert_eq!(qubit.state, (Complex{re: 0.0, im: 0.0}, Complex{re: 1.0, im: 0.0}));
     }
 
     #[test]
