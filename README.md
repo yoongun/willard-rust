@@ -3,3 +3,50 @@
 # :cat: willard
 
 Heterogeneous quantum computer simulator in Rust
+
+## How to use
+
+### Declare the use of this module
+
+Add this line to the top of your project
+
+```rust
+use willard;
+```
+
+### Make a new qubit
+
+```rust
+let mut qubit = willard::Qubit::default();
+```
+
+This will give you a qubit with state |0>
+
+#### Measure it
+
+```rust
+let result = willard::measure(&mut qubit);
+```
+
+### Applying gates
+
+#### Single qubit gates
+
+```rust
+// Hadamard gate
+willard::gate::h(&mut qubit);
+
+// x, y, z gate
+willard::gate::x(&mut qubit);
+willard::gate::y(&mut qubit);
+willard::gate::z(&mut qubit);
+
+// not gate (same as x gate)
+willard::gate::not(&mut qubit);
+
+// square root of not gate
+willard::gate::sqrt_not(&mut qubit);
+
+// phase gate
+willard::gate::phase(&mut qubit, <degree in radian of f32 type>);
+```
