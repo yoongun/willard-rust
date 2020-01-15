@@ -2,7 +2,14 @@ use crate::Qubit;
 use num::complex::Complex;
 
 pub fn x(qubit: &mut Qubit) {
-    not(qubit);
+    let mat = [[Complex::new(0.0, 0.0), Complex::new(1.0, 0.0)],
+	       [Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)]];
+    let mut state: (Complex<f32>, Complex<f32>)= (Complex::new(0.0, 0.0), Complex::new(0.0, 0.0));
+
+    state.0 = mat[0][0] * qubit.state.0 + mat[0][1] * qubit.state.1;
+    state.1 = mat[1][0] * qubit.state.0 + mat[1][1] * qubit.state.1;
+
+    qubit.state = state;
 }
 
 pub fn y(qubit: &mut Qubit) {
@@ -32,8 +39,7 @@ pub fn phase(qubit: &mut Qubit, deg: f32) {
 }
 
 pub fn not(qubit: &mut Qubit) {
-    let state = qubit.state;
-    qubit.state = (state.1.re, Complex::new(state.0, -state.1.im));
+    x(qubit)
 }
 
 pub fn h(qubit: &mut Qubit) {
