@@ -13,7 +13,7 @@ pub struct Qubit{
 
 impl Default for Qubit {
     fn default() -> Qubit {
-	Qubit{state: (1.0, Complex::new(0.0, 0.0))}
+	Qubit{state: (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0))}
     }
 }
 
