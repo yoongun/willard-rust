@@ -8,7 +8,7 @@ use num::complex::Complex;
 pub mod gate;
 
 pub struct Qubit{
-    state: (f32, Complex<f32>),
+    state: (Complex<f32>, Complex<f32>),
 }
 
 impl Default for Qubit {
