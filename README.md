@@ -11,6 +11,7 @@ Heterogeneous quantum computer simulator in Rust
 Add this line to the top of your project
 
 ```rust
+extern crate willard;
 use willard;
 ```
 
