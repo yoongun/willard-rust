@@ -1,6 +1,7 @@
 ![crate v0.1.0 badge](https://img.shields.io/badge/crates.io-v0.1.0-orange.svg?longCache=true)
 ![test status badge](https://github.com/cfr2ak/willard/workflows/test/badge.svg)
 ![build status badge](https://github.com/cfr2ak/willard/workflows/build/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # :cat: willard
 
