@@ -50,7 +50,7 @@ mod tests {
     fn test_qubit_init() {
 	let qubit = Qubit::default();
 
-	assert_eq!(qubit.state, (1.0, Complex{re: 0.0, im: 0.0}));
+	assert_eq!(qubit.state, (Complex{re: 1.0, im: 0.0}, Complex{re: 0.0, im: 0.0}));
     }
 
     #[test]

@@ -94,31 +94,31 @@ mod tests {
     fn test_y() {
 	let mut qubit0 = Qubit::default();
 	y(&mut qubit0);
-	assert_eq!(qubit0.state, (0.0, Complex{re: 1.0, im: 0.0}));
+	assert_eq!(qubit0.state, (Complex{re: 0.0, im: 0.0}, Complex{re: 1.0, im: 0.0}));
 
 	let mut qubit1 = Qubit::default();
 	x(&mut qubit1);
 	y(&mut qubit1);
-	assert_eq!(qubit1.state, (1.0, Complex{re: 0.0, im: 0.0}));
+	assert_eq!(qubit1.state, (Complex{re: 1.0, im: 0.0}, Complex{re: 0.0, im: 0.0}));
     }
 
     #[test]
     fn test_z() {
 	let mut qubit0 = Qubit::default();
 	z(&mut qubit0);
-	assert_eq!(qubit0.state, (1.0, Complex{re: 0.0, im: 0.0}));
+	assert_eq!(qubit0.state, (Complex{re: 1.0, im: 0.0}, Complex{re: 0.0, im: 0.0}));
 
 	let mut qubit1 = Qubit::default();
 	x(&mut qubit1);
 	z(&mut qubit1);
-	assert_eq!(qubit1.state, (0.0, Complex{re: 1.0, im: 0.0}));
+	assert_eq!(qubit1.state, (Complex{re: 0.0, im: 0.0}, Complex{re: 1.0, im: 0.0}));
     }
 
     #[test]
     fn test_not() {
 	let mut qubit = Qubit::default();
 	not(&mut qubit);
-	assert_eq!(qubit.state, (0.0, Complex{re: 1.0, im: 0.0}));
+	assert_eq!(qubit.state, (Complex{re: 0.0, im: 0.0}, Complex{re: 1.0, im: 0.0}));
     }
 
     #[test]
@@ -131,7 +131,7 @@ mod tests {
 	let root_two = (2.0 as f32).sqrt();
 
 	let got = qubit0.state;
-	let want = (1.0 / root_two, Complex{re: 1.0 / root_two, im: 0.0});
+	let want = (Complex{re: 1.0 / root_two, im: 0.0}, Complex{re: 1.0 / root_two, im: 0.0});
 
 	assert_eq!(got, want);
 
@@ -142,7 +142,7 @@ mod tests {
 	h(&mut qubit1);
 
 	let got = qubit1.state;
-	let want = (1.0 / root_two, Complex{re: -1.0 / root_two, im: 0.0});
+	let want = (Complex{re: 1.0 / root_two, im: 0.0}, Complex{re: -1.0 / root_two, im: 0.0});
 
 	assert_eq!(got, want);
     }
