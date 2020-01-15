@@ -111,7 +111,7 @@ mod tests {
 	let mut qubit1 = Qubit::default();
 	x(&mut qubit1);
 	z(&mut qubit1);
-	assert_eq!(qubit1.state, (Complex{re: 0.0, im: 0.0}, Complex{re: 1.0, im: 0.0}));
+	assert_eq!(qubit1.state, (Complex{re: 0.0, im: 0.0}, Complex{re: -1.0, im: 0.0}));
     }
 
     #[test]
