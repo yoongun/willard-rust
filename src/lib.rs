@@ -55,8 +55,8 @@ pub mod alg {
     /// # Quantum Key Distribution algorithm
     ///
     ///
-    pub fn qkd() -> {
-
+    pub fn qkd(){
+	return;
     }
 }
 
