@@ -162,10 +162,9 @@ mod tests {
     #[test]
     fn test_sqrt_not() {
 	let mut qubit = Qubit::default();
-
+	sqrt_not(&mut qubit);
 	sqrt_not(&mut qubit);
 
-	sqrt_not(&mut qubit);
 	let mut other_qubit = Qubit::default();
 	not(&mut other_qubit);
 
