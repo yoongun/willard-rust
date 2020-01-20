@@ -75,6 +75,13 @@ pub fn sqrt_not(qubit: &mut Qubit) {
     qubit.state = state;
 }
 
+pub fn cnot(qubit1: &mut Qubit, qubit2: &mut Qubit) {
+    let mat = [[1.0, 0.0, 0.0, 0.0],
+	       [0.0, 1.0, 0.0, 0.0],
+	       [0.0, 0.0, 0.0, 1.0],
+	       [0.0, 0.0, 1.0, 0.0]];
+}
+
 /// Normalize the phase to make the first value of the qubit
 /// in a real value
 fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
