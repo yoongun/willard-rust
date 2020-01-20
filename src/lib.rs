@@ -54,8 +54,25 @@ pub mod alg {
 
     /// # Quantum Key Distribution algorithm
     ///
-    ///
-    pub fn qkd(){
+    /// 
+    pub fn qkd(spy: bool) -> bool {
+	let alice = Qubit::default();
+	let conn = Qubit::default();
+	let bob = Qubit::default();
+
+	// ### Start Alice part ###
+	let a1 = qrn();
+	let a2 = qrn();
+
+	if (a1 == 1) {
+	    gate::x(&mut alice);
+	}
+	if (a2 == 1) {
+	    gate::had(&mut alice);
+	}
+	// ### End Alice part #####
+
+
 	return;
     }
 }
