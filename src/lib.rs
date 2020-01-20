@@ -55,7 +55,7 @@ pub mod alg {
     /// # Quantum Key Distribution algorithm
     ///
     /// 
-    pub fn qkd(spy: bool, use_had: bool) -> bool {
+    pub fn qkd(spy: bool, use_h: bool) -> bool {
 	let alice = Qubit::default();
 	let conn = Qubit::default();
 	let bob = Qubit::default();
@@ -64,11 +64,11 @@ pub mod alg {
 	let a1 = qrng();
 	let a2 = qrng();
 
-	if (a1 == 1) {
+	if a1 == 1 {
 	    gate::x(&mut alice);
 	}
-	if (a2 == 1) {
-	    gate::had(&mut alice);
+	if a2 == 1 {
+	    gate::h(&mut alice);
 	}
 	// ### End Alice part #####
 
@@ -76,15 +76,15 @@ pub mod alg {
 	gate::swap(&mut conn, &mut alice);
 
 	// ### Sniffing starts ###
-	if (spy == true) {
-	    if (use_had == true) {
+	if spy == true {
+	    if use_h == true {
 		gate::h(&mut conn);
 	    }
 
 	    let stolen = measure(&mut conn);
 	    conn = c2q(stolen);
 
-	    if (use_had == true) {
+	    if use_h == true {
 		gate::h(&mut conn);
 	    }
 	}
@@ -94,15 +94,15 @@ pub mod alg {
 	let a3 = qrng();
 	gate::swap(&mut bob, &mut conn);
 
-	if (a3 == 1) {
+	if a3 == 1 {
 	    gate::h(&mut bob);
 	}
 	let recv = measure(&mut bob);
 	// ### Bob part ends ############
 
 	// ### Checks whether the spy sniffed the qubit ###
-	if (a2 == a3) {
-	    if (a1 != recv) {
+	if a2 == a3 {
+	    if a1 != recv {
 		return true;
 	    }
 	}
