@@ -80,6 +80,12 @@ pub fn cnot(qubit1: &mut Qubit, qubit2: &mut Qubit) {
 	       [0.0, 1.0, 0.0, 0.0],
 	       [0.0, 0.0, 0.0, 1.0],
 	       [0.0, 0.0, 1.0, 0.0]];
+    let mut crumb: [Complex<f32>; 4] = [
+	qubit1.state.0 * qubit2.state.0,
+	qubit1.state.1 * qubit2.state.0,
+	qubit1.state.0 * qubit2.state.1,
+	qubit1.state.1 * qubit2.state.1
+    ];
 }
 
 /// Normalize the phase to make the first value of the qubit
