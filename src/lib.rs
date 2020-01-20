@@ -56,9 +56,9 @@ pub mod alg {
     ///
     /// 
     pub fn qkd(spy: bool, use_h: bool) -> bool {
-	let alice = Qubit::default();
-	let conn = Qubit::default();
-	let bob = Qubit::default();
+	let mut alice = Qubit::default();
+	let mut conn = Qubit::default();
+	let mut bob = Qubit::default();
 
 	// ### Start Alice part ###
 	let a1 = qrng();
@@ -82,7 +82,13 @@ pub mod alg {
 	    }
 
 	    let stolen = measure(&mut conn);
-	    conn = c2q(stolen);
+
+	    if stolen == 0 {
+		conn.state = (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0));
+	    }
+	    else {
+		conn.state = (Complex::new(0.0, 0.0), Complex::new(1.0, 0.0));
+	    }
 
 	    if use_h == true {
 		gate::h(&mut conn);
