@@ -42,11 +42,11 @@ fn measure(qubit: &mut Qubit) -> u32 {
 pub mod alg {
     use crate::*;
 
-    /// # Quantum Random Number generator
+    /// # Quantum Random Number Generator
     ///
     /// Returns a single bit with a value 0 or 1 with
     /// 50% of possibility each.
-    pub fn qrn() -> u32 {
+    pub fn qrng() -> u32 {
 	let mut qubit = Qubit::default();
 	gate::h(&mut qubit);
 	return measure(&mut qubit);
@@ -61,8 +61,8 @@ pub mod alg {
 	let bob = Qubit::default();
 
 	// ### Start Alice part ###
-	let a1 = qrn();
-	let a2 = qrn();
+	let a1 = qrng();
+	let a2 = qrng();
 
 	if (a1 == 1) {
 	    gate::x(&mut alice);
@@ -91,7 +91,7 @@ pub mod alg {
 	// ### Sniffing ends #####
 
 	// ### Bob receives the qubit ###
-	let a3 = qrn();
+	let a3 = qrng();
 	gate::swap(&mut bob, &mut conn);
 
 	if (a3 == 1) {
