@@ -55,7 +55,7 @@ pub mod alg {
     /// # Quantum Key Distribution algorithm
     ///
     /// 
-    pub fn qkd(spy: bool) -> bool {
+    pub fn qkd(spy: bool, use_had: bool) -> bool {
 	let alice = Qubit::default();
 	let conn = Qubit::default();
 	let bob = Qubit::default();
@@ -72,8 +72,43 @@ pub mod alg {
 	}
 	// ### End Alice part #####
 
+	// ### Sends the qubit via fiber ###
+	gate::swap(&mut conn, &mut alice);
 
-	return;
+	// ### Sniffing starts ###
+	if (spy == true) {
+	    if (use_had == true) {
+		gate::h(&mut conn);
+	    }
+
+	    let stolen = measure(&mut conn);
+	    conn = c2q(stolen);
+
+	    if (use_had == true) {
+		gate::h(&mut conn);
+	    }
+	}
+	// ### Sniffing ends #####
+
+	// ### Bob receives the qubit ###
+	let a3 = qrn();
+	gate::swap(&mut bob, &mut conn);
+
+	if (a3 == 1) {
+	    gate::h(&mut bob);
+	}
+	let recv = measure(&mut bob);
+	// ### Bob part ends ############
+
+	// ### Checks whether the spy sniffed the qubit ###
+	if (a2 == a3) {
+	    if (a1 != recv) {
+		return true;
+	    }
+	}
+	// ### Sniffing check end #########################
+
+	return false;
     }
 }
 
