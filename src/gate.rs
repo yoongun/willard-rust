@@ -1,4 +1,6 @@
 use crate::Qubit;
+use crate::measure;
+
 use num::complex::Complex;
 
 /// Pauli-X gate implementation
@@ -191,8 +193,6 @@ mod tests {
 
     #[test]
     fn test_cnot() {
-	use crate::willard;
-
 	for _n in 0..100 {
 	    let mut q1 = Qubit::default();
 	    let mut q2 = Qubit::default();
@@ -200,10 +200,14 @@ mod tests {
 
 	    cnot(&mut q1, &mut q2);
 
-	    let want = willard::measure(&mut q1);
-	    let got = willard::measure(&mut q2);
+	    let want = measure(&mut q1);
+	    let got = measure(&mut q2);
 	    assert_eq!(got, want);
 	}
+    }
+
+    #[test]
+    fn test_swap() {
     }
 
     #[test]
