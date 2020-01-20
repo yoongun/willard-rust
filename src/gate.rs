@@ -1,6 +1,7 @@
 use crate::Qubit;
 use num::complex::Complex;
 
+/// Pauli-X gate implementation
 pub fn x(qubit: &mut Qubit) {
     let mat = [[Complex::new(0.0, 0.0), Complex::new(1.0, 0.0)],
 	       [Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)]];
@@ -12,6 +13,7 @@ pub fn x(qubit: &mut Qubit) {
     qubit.state = state;
 }
 
+/// Pauli-Y gate implementation
 pub fn y(qubit: &mut Qubit) {
     let mat = [[Complex::new(0.0, 0.0), Complex::new(0.0, -1.0)],
 	       [Complex::new(0.0, 1.0), Complex::new(0.0, 0.0)]];
@@ -23,10 +25,14 @@ pub fn y(qubit: &mut Qubit) {
     qubit.state = state;
 }
 
+/// Pauli-Z gate implementation
+/// Implemented as the interface of the `phase(pi)` gate
 pub fn z(qubit: &mut Qubit) {
     phase(qubit, std::f32::consts::PI);
 }
 
+/// Phase gate implementation
+/// deg parameter is handled with assumption it is a radian value
 pub fn phase(qubit: &mut Qubit, deg: f32) {
     let mat = [[Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)],
 	       [Complex::new(0.0, 0.0), Complex::new(deg.cos(), deg.sin())]];
@@ -38,10 +44,13 @@ pub fn phase(qubit: &mut Qubit, deg: f32) {
     qubit.state = state;
 }
 
+/// Not gate implementation
+/// Implemented as the interface of the Pauli-X gate
 pub fn not(qubit: &mut Qubit) {
     x(qubit)
 }
 
+/// Hadamard gate implementation
 pub fn h(qubit: &mut Qubit) {
     let root_two = (2.0 as f32).sqrt();
     let mat = [[1.0 / root_two, 1.0 / root_two],
@@ -54,6 +63,7 @@ pub fn h(qubit: &mut Qubit) {
     qubit.state = state;
 }
 
+/// Square root of not gate implementation
 pub fn sqrt_not(qubit: &mut Qubit) {
     let mat = [[Complex::new(1.0, 1.0) / 2.0, Complex::new(1.0, -1.0) / 2.0],
 	       [Complex::new(1.0, -1.0) / 2.0, Complex::new(1.0, 1.0) / 2.0]];
@@ -65,6 +75,8 @@ pub fn sqrt_not(qubit: &mut Qubit) {
     qubit.state = state;
 }
 
+/// Normalize the phase to make the first value of the qubit
+/// in a real value
 fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
     if (state.0 == Complex{re: 0.0, im: 0.0}) {
 	return (0.0, Complex::new(1.0, 0.0));

@@ -7,16 +7,23 @@ use num::complex::Complex;
 
 pub mod gate;
 
+/// # Data struct of the qubit
+///
+/// Contains the complex value of the alpha and beta
+/// to express the superposition and the phase of the qubit
 pub struct Qubit{
     state: (Complex<f32>, Complex<f32>),
 }
 
 impl Default for Qubit {
+    /// Define the default states of the qubit as |0>
     fn default() -> Qubit {
 	Qubit{state: (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0))}
     }
 }
 
+/// Measure a qubit.
+/// Change its state after the measure has occured.
 fn measure(qubit: &mut Qubit) -> u32 {
     let mut rng = rand::thread_rng();
     let rn = rng.gen::<f32>();
@@ -31,13 +38,25 @@ fn measure(qubit: &mut Qubit) -> u32 {
     return 1;
 }
 
+/// Set of quantum algorithms implemented in the willard
 pub mod alg {
     use crate::*;
 
+    /// # Quantum Random Number generator
+    ///
+    /// Returns a single bit with a value 0 or 1 with
+    /// 50% of possibility each.
     pub fn qrn() -> u32 {
 	let mut qubit = Qubit::default();
 	gate::h(&mut qubit);
 	return measure(&mut qubit);
+    }
+
+    /// # Quantum Key Distribution algorithm
+    ///
+    ///
+    pub fn qkd() -> {
+
     }
 }
 
