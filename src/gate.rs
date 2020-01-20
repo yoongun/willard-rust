@@ -176,6 +176,21 @@ mod tests {
     }
 
     #[test]
+    fn test_cnot() {
+	for _n in 0..100 {
+	    let mut q1 = Qubit::default();
+	    let mut q2 = Qubit::default();
+	    had(&mut q1);
+
+	    cnot(&mut q1, &mut q2);
+
+	    let want = measure(&mut q1);
+	    let got = measure(&mut q2);
+	    assert_eq!(got, want);
+	}
+    }
+
+    #[test]
     fn test_normalize_phase() {
 	let state = (Complex::new(0.0, -1.0), Complex::new(1.0, 0.0));
 	let got = normalize_phase(state);
