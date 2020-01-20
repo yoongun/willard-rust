@@ -7,6 +7,10 @@
 
 Heterogeneous quantum computer simulator in Rust
 
+## F.D.C. willard: the greatest physicist ever exist in cat history
+
+https://en.wikipedia.org/wiki/F._D._C._Willard
+
 ## How to use
 
 ### Declare the use of this module
