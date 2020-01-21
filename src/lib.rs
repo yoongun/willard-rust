@@ -16,14 +16,42 @@ pub struct Qubit{
     state: (Complex<f32>, Complex<f32>),
 }
 
-pub struct Qubyte {
-    bits: [Qubit; 8],
-}
-
 impl Default for Qubit {
     /// Define the default states of the qubit as |0>
     fn default() -> Qubit {
 	Qubit{state: (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0))}
+    }
+}
+
+pub struct Qucrumb {
+    bits: [Qubit; 2],
+}
+
+pub struct Qunibble {
+    crumbs: [Qucrumb; 2],
+}
+
+pub struct Qubyte {
+    nibbles: [Qunibble; 2],
+}
+
+impl Qubyte {
+    fn state(&self) -> [Complex<f32>; 256] {
+	let mut a: [Complex<f32>; 256];
+
+	for n in 0..256 {
+	    let bit_list = [
+		n & 1,
+		n & 2,
+		n & 4,
+		n & 8,
+		n & 16,
+		n & 32,
+		n & 64,
+		n & 128,
+	    ];
+	    
+	}
     }
 }
 
