@@ -36,8 +36,8 @@ impl Qucrumb {
 
 	for n in 0..3 {
 	    let bit_list = [
-		n & 1,
-		n & 2
+		(n & 1) || 0,
+		(n & 2) || 0
 	    ];
 	    ret[n] = bit1[bit_list[0]] * bit2[bit_list[1]];
 	}
@@ -47,6 +47,19 @@ impl Qucrumb {
 
 pub struct Qunibble {
     crumbs: [Qucrumb; 2],
+}
+
+impl Qunibble {
+    fn state(&self) -> [Complex<f32>; 16] {
+	let mut ret: [Complex<f32>; 16];
+
+	let crumb1 = self.crumbs[0].state();
+	let crumb2 = self.crumbs[1].state();
+
+	for n in 0..15 {
+
+	}
+    }
 }
 
 pub struct Qubyte {
