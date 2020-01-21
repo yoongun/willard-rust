@@ -1,5 +1,4 @@
-use crate::Qubit;
-use crate::measure;
+use crate::*;
 
 use num::complex::Complex;
 
