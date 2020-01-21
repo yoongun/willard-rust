@@ -1,3 +1,4 @@
+/// Set of quantum gates
 use crate::*;
 
 use num::complex::Complex;

@@ -16,9 +16,8 @@ pub struct Qubit{
     state: (Complex<f32>, Complex<f32>),
 }
 
-pub struct Qucrumb {
-    b0: Qubit,
-    b1: Qubit,
+pub struct Qubyte {
+    bits: [Qubit; 8],
 }
 
 impl Default for Qubit {
