@@ -27,6 +27,24 @@ pub struct Qucrumb {
     bits: [Qubit; 2],
 }
 
+impl Qucrumb {
+    fn state(&self) -> [Complex<f32>; 4] {
+	let mut ret: [Complex<f32>; 4];
+
+	let bit1 = [self.bits[0].state.0, self.bits[0].state.1];
+	let bit2 = [self.bits[1].state.0, self.bits[1].state.1];
+
+	for n in 0..3 {
+	    let bit_list = [
+		n & 1,
+		n & 2
+	    ];
+	    ret[n] = bit1[bit_list[0]] * bit2[bit_list[1]];
+	}
+	return ret;
+    }
+}
+
 pub struct Qunibble {
     crumbs: [Qucrumb; 2],
 }
