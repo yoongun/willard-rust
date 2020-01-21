@@ -13,6 +13,8 @@ https://en.wikipedia.org/wiki/F._D._C._Willard
 
 ## How to use
 
+***This guide is based on the `release/v0.1.0` branch***
+
 ### Declare the use of this module
 
 Add this line to the top of your project
