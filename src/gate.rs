@@ -89,6 +89,10 @@ pub fn cnot(qubit1: &mut Qubit, qubit2: &mut Qubit) {
 	qubit1.state.1 * qubit2.state.1
     ];
 
+}
+
+pub fn swap(dest: &mut Qubit, src: &mut Qubit) {
+    return;
 
 }
 
