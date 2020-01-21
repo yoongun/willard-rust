@@ -77,23 +77,26 @@ pub fn sqrt_not(qubit: &mut Qubit) {
     qubit.state = state;
 }
 
+/// Implementation of the CNOT gate
+/// Equivalent for the CX gate
 pub fn cnot(qubit1: &mut Qubit, qubit2: &mut Qubit) {
     let mat = [[1.0, 0.0, 0.0, 0.0],
 	       [0.0, 1.0, 0.0, 0.0],
 	       [0.0, 0.0, 0.0, 1.0],
 	       [0.0, 0.0, 1.0, 0.0]];
-    let mut crumb: [Complex<f32>; 4] = [
+    let mut qucrumb: [Complex<f32>; 4] = [
 	qubit1.state.0 * qubit2.state.0,
 	qubit1.state.1 * qubit2.state.0,
 	qubit1.state.0 * qubit2.state.1,
 	qubit1.state.1 * qubit2.state.1
     ];
 
+
+    return;
 }
 
 pub fn swap(dest: &mut Qubit, src: &mut Qubit) {
     return;
-
 }
 
 /// Normalize the phase to make the first value of the qubit
