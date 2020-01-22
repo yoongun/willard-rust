@@ -38,7 +38,8 @@ impl Qucrumb {
 	]};
     }
 
-    fn new(qubit1: Qubit, qubit2: Qubit) -> Qucrumb {
+    /// Define the initialization of the qucrumb with two qubit
+    fn new(fst: Qubit, snd: Qubit) -> Qucrumb {
 	let mut state: [Complex<f32>; 4] = [
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
@@ -46,8 +47,8 @@ impl Qucrumb {
 	    Complex::new(0.0, 0.0),
 	];
 
-	let bit1 = [qubit1.state.0, qubit1.state.1];
-	let bit2 = [qubit2.state.0, qubit2.state.1];
+	let bit1 = [fst.state.0, fst.state.1];
+	let bit2 = [snd.state.0, snd.state.1];
 
 	for n in 0..3 {
 	    let bit_list = [
@@ -113,11 +114,11 @@ mod tests {
 	let got = qucrumb2.state;
 	let want = [
 	    Complex::new(0.0, 0.0),
+	    Complex::new(0.0, 0.0),
 	    Complex::new(1.0, 0.0),
 	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
 	];
-	assert_eq!(got, want)
+	assert_eq!(got, want);
     }
 
     #[test]
