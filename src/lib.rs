@@ -52,7 +52,7 @@ impl Qucrumb {
 	for n in 0..3 {
 	    let bit_list = [
 		(n & 1),
-		(n & 2)
+		(n & 2) >> 1
 	    ];
 	    state[n] = bit1[bit_list[0]] * bit2[bit_list[1]];
 	}
@@ -94,15 +94,26 @@ mod tests {
 	// Test to intializae default
 	let qucrumb1 = Qucrumb::default();
 
-	assert_eq!(1, 1);
+	assert_eq!(qucrumb1.state, [
+	    Complex::new(1.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	]);
 
 	// Test to initilize with the existing qubits 
 	let qubit1 = Qubit::default();
-	let qubit2 = Qubit::default();
+	let mut qubit2 = Qubit::default();
+	gate::x(&mut qubit2);
 
 	let qucrumb2 = Qucrumb::new(qubit1, qubit2); 
 
-	assert_eq!(1, 1);
+	assert_eq!(qucrumb2.state, [
+	    Complex::new(0.0, 0.0),
+	    Complex::new(1.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	]);
     }
 
     #[test]
