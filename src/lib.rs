@@ -24,65 +24,29 @@ impl Default for Qubit {
 }
 
 pub struct Qucrumb {
-    bits: [Qubit; 2],
+    state: [Complex<f32>; 4]
 }
-
+    
 impl Qucrumb {
-    fn state(&self) -> [Complex<f32>; 4] {
-	let mut ret: [Complex<f32>; 4];
+    fn new(qubit1: Qubit, qubit2: Qubit) -> Qucrumb {
+	let mut state: [Complex<f32>; 4] = [
+	    Complex::new(1.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	];
 
-	let bit1 = [self.bits[0].state.0, self.bits[0].state.1];
-	let bit2 = [self.bits[1].state.0, self.bits[1].state.1];
+	let bit1 = [qubit1.state.0, qubit1.state.1];
+	let bit2 = [qubit2.state.0, qubit2.state.1];
 
 	for n in 0..3 {
 	    let bit_list = [
-		(n & 1) || 0,
-		(n & 2) || 0
+		(n & 1),
+		(n & 2)
 	    ];
-	    ret[n] = bit1[bit_list[0]] * bit2[bit_list[1]];
+	    state[n] = bit1[bit_list[0]] * bit2[bit_list[1]];
 	}
-	return ret;
-    }
-}
-
-pub struct Qunibble {
-    crumbs: [Qucrumb; 2],
-}
-
-impl Qunibble {
-    fn state(&self) -> [Complex<f32>; 16] {
-	let mut ret: [Complex<f32>; 16];
-
-	let crumb1 = self.crumbs[0].state();
-	let crumb2 = self.crumbs[1].state();
-
-	for n in 0..15 {
-
-	}
-    }
-}
-
-pub struct Qubyte {
-    nibbles: [Qunibble; 2],
-}
-
-impl Qubyte {
-    fn state(&self) -> [Complex<f32>; 256] {
-	let mut a: [Complex<f32>; 256];
-
-	for n in 0..256 {
-	    let bit_list = [
-		n & 1,
-		n & 2,
-		n & 4,
-		n & 8,
-		n & 16,
-		n & 32,
-		n & 64,
-		n & 128,
-	    ];
-	    
-	}
+	return Qucrumb{state: state};
     }
 }
 
