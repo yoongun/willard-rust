@@ -94,12 +94,14 @@ mod tests {
 	// Test to intializae default
 	let qucrumb1 = Qucrumb::default();
 
-	assert_eq!(qucrumb1.state, [
+	let got = qucrumb1.state;
+	let want = [
 	    Complex::new(1.0, 0.0),
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
-	]);
+	];
+	assert_eq!(got, want);
 
 	// Test to initilize with the existing qubits 
 	let qubit1 = Qubit::default();
@@ -108,12 +110,14 @@ mod tests {
 
 	let qucrumb2 = Qucrumb::new(qubit1, qubit2); 
 
-	assert_eq!(qucrumb2.state, [
+	let got = qucrumb2.state;
+	let want = [
 	    Complex::new(0.0, 0.0),
 	    Complex::new(1.0, 0.0),
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
-	]);
+	];
+	assert_eq!(got, want)
     }
 
     #[test]
