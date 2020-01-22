@@ -28,9 +28,19 @@ pub struct Qucrumb {
 }
     
 impl Qucrumb {
+    /// Define the default states of the qucrumb as |00>
+    fn default() -> Qucrumb {
+	return Qucrumb{state: [
+	    Complex::new(1.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	    Complex::new(0.0, 0.0),
+	]};
+    }
+
     fn new(qubit1: Qubit, qubit2: Qubit) -> Qucrumb {
 	let mut state: [Complex<f32>; 4] = [
-	    Complex::new(1.0, 0.0),
+	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
@@ -77,6 +87,22 @@ mod tests {
 	let qubit = Qubit::default();
 
 	assert_eq!(qubit.state, (Complex{re: 1.0, im: 0.0}, Complex{re: 0.0, im: 0.0}));
+    }
+
+    #[test]
+    fn test_qucrumb_init() {
+	// Test to intializae default
+	let qucrumb1 = Qucrumb::default();
+
+	assert_eq!(1, 1);
+
+	// Test to initilize with the existing qubits 
+	let qubit1 = Qubit::default();
+	let qubit2 = Qubit::default();
+
+	let qucrumb2 = Qucrumb::new(qubit1, qubit2); 
+
+	assert_eq!(1, 1);
     }
 
     #[test]
