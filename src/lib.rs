@@ -24,40 +24,42 @@ impl Default for Qubit {
 }
 
 pub struct Qucrumb {
-    state: [Complex<f32>; 4]
+    bits: [Qubit; 2],
 }
-    
-impl Qucrumb {
+
+impl Default for Qucrumb {
     /// Define the default states of the qucrumb as |00>
     fn default() -> Qucrumb {
-	return Qucrumb{state: [
-	    Complex::new(1.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	]};
+	Qucrumb{bits: [Qubit::default(), Qubit::default()]}
     }
-
+}
+ 
+impl Qucrumb {
     /// Define the initialization of the qucrumb with two qubit
     fn new(fst: Qubit, snd: Qubit) -> Qucrumb {
-	let mut state: [Complex<f32>; 4] = [
+	Qucrumb{bits: [fst, snd]};
+    }
+
+    /// Calculate the state based on its values
+    fn state(&self) -> [Complex<f32>; 4] {
+	let mut ret: [Complex<f32>; 4] = [
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
 	    Complex::new(0.0, 0.0),
 	];
 
-	let bit1 = [fst.state.0, fst.state.1];
-	let bit2 = [snd.state.0, snd.state.1];
+	let bit1 = [self.bits[0].state.0, self.bits[0].state.1];
+	let bit2 = [self.bits[1].state.0, self.bits[1].state.1];
 
 	for n in 0..3 {
 	    let bit_list = [
 		(n & 1),
 		(n & 2) >> 1
 	    ];
-	    state[n] = bit1[bit_list[0]] * bit2[bit_list[1]];
+	    ret[n] = bit1[bit_list[0]] * bit2[bit_list[1]];
 	}
-	return Qucrumb{state: state};
+	return ret;
     }
 }
 
