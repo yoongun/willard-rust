@@ -17,7 +17,17 @@ https://en.wikipedia.org/wiki/F._D._C._Willard
 
 ### Declare the use of this module
 
-Add this line to the top of your project
+Add `willard` as a dependency of your project at `Cargo.toml`
+
+```yaml
+...
+
+[dependencies]
+willard = "0.1.0"
+...
+```
+
+And add this line to the top of your project
 
 ```rust
 extern crate willard;
