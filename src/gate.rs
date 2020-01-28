@@ -3,6 +3,7 @@ use crate::*;
 
 use num::complex::Complex;
 
+
 /// Pauli-X gate implementation
 pub fn x(qubit: &mut Qubit) {
     let mat = [[Complex::new(0.0, 0.0), Complex::new(1.0, 0.0)],
@@ -125,7 +126,10 @@ mod tests {
 	let mut qubit1 = Qubit::default();
 	x(&mut qubit1);
 	z(&mut qubit1);
-	assert_eq!(qubit1.state, (Complex{re: 0.0, im: 0.0}, Complex{re: -1.0, im: 0.0}));
+
+	assert_eq!(qubit1.state.0, Complex{re: 0.0, im: 0.0});
+	relative_eq!(qubit1.state.1.re, -1.0, epsilon = f32::EPSILON);
+	relative_eq!(qubit1.state.1.im, 0.0, epsilon = f32::EPSILON);
     }
 
     #[test]
