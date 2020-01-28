@@ -14,6 +14,11 @@ pub struct Circuit{
     pub qubits: Vec<(Qubit, i32)>,
 }
 
+struct Entangle {
+    pub pair: (i32, i32),
+    pub gate: str,
+}
+
 impl Default for Qubit {
     /// Define the default states of the qubit as |0>
     fn default() -> Qubit {
