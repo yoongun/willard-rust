@@ -4,6 +4,14 @@ use crate::*;
 use num::complex::Complex;
 
 
+enum CGate {
+    CNOT,
+    CX,
+    CY,
+    CZ,
+}
+
+
 /// Pauli-X gate implementation
 pub fn x(qubit: &mut Qubit) {
     let mat = [[Complex::new(0.0, 0.0), Complex::new(1.0, 0.0)],

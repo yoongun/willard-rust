@@ -1,3 +1,5 @@
+/// Set of data types used in a Quantum circuit
+use crate::*;
 use num::complex::Complex;
 use std::vec::Vec;
 
@@ -12,11 +14,12 @@ pub struct Qubit{
 
 pub struct Circuit{
     pub qubits: Vec<(Qubit, i32)>,
+    pub ents: Vec<Entangle>,
 }
 
 struct Entangle {
     pub pair: (i32, i32),
-    pub gate: str,
+    pub gate: Gate,
 }
 
 impl Default for Qubit {
