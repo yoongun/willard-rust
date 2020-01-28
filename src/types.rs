@@ -17,9 +17,9 @@ pub struct Circuit{
     pub ents: Vec<Entangle>,
 }
 
-struct Entangle {
+pub struct Entangle {
     pub pair: (i32, i32),
-    pub gate: Gate,
+    pub gate: CGate,
 }
 
 impl Default for Qubit {
@@ -31,7 +31,7 @@ impl Default for Qubit {
 
 impl Default for Circuit {
     fn default() -> Circuit {
-	Circuit{qubits: Vec::new()}
+	Circuit{qubits: Vec::new(), ents: Vec::new()}
     }
 }
 

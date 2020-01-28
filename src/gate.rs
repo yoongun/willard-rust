@@ -4,7 +4,10 @@ use crate::*;
 use num::complex::Complex;
 
 
-enum CGate {
+/// Type for the controll gates
+///
+/// Used to make an entangled state in the quantum circuits
+pub enum CGate {
     CNOT,
     CX,
     CY,
@@ -88,12 +91,7 @@ pub fn sqrt_not(qubit: &mut Qubit) {
 
 /// Implementation of the CNOT gate
 /// Equivalent for the CX gate
-pub fn cnot(qubit1: &mut Qubit, qubit2: &mut Qubit) {
-    let mat = [[1.0, 0.0, 0.0, 0.0],
-	       [0.0, 1.0, 0.0, 0.0],
-	       [0.0, 0.0, 0.0, 1.0],
-	       [0.0, 0.0, 1.0, 0.0]];
-
+pub fn cnot(circ: Circuit, src: i32, dest: i32) {
     return;
 }
 
@@ -199,7 +197,7 @@ mod tests {
 	    circ.add(q1, 0);
 	    circ.add(q2, 0);
 
-	    circ.cnot(0, 1);
+	    cnot(&mut circ, 0, 1);
 
 	    let want = measure(&mut circ.qubits[0].0);
 	    let got = measure(&mut circ.qubits[1].0);

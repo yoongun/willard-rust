@@ -13,7 +13,7 @@ use num::complex::Complex;
 
 use types::Qubit;
 use types::Circuit;
-use gate::Gate;
+use gate::CGate;
 
 
 /// Measure a qubit.
