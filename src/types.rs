@@ -1,4 +1,6 @@
 use num::complex::Complex;
+use std::vec::Vec;
+use std::string::String;
 
 
 /// # Data struct of the qubit
@@ -9,12 +11,23 @@ pub struct Qubit{
     pub state: (Complex<f32>, Complex<f32>),
 }
 
+pub struct Circuit{
+    pub mut qubits: Vec<Qubit>,
+}
+
 impl Default for Qubit {
     /// Define the default states of the qubit as |0>
     fn default() -> Qubit {
 	Qubit{state: (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0))}
     }
 }
+
+impl Default for Circuit {
+    fn default() -> Circuit {
+	Circuit{qubits: Vec::new()};
+    }
+}
+
 
 #[cfg(test)]
 mod tests {
@@ -26,6 +39,17 @@ mod tests {
 	let qubit = Qubit::default();
 
 	assert_eq!(qubit.state, (Complex{re: 1.0, im: 0.0}, Complex{re: 0.0, im: 0.0}));
+    }
+
+    #[test]
+    fn test_add_qubit_to_circuti() {
+	let circ = Circuit::default();
+
+	let qubit = Qubit::default();
+	circ.add(qubit, 0);
+
+	assert_eq!(circ.qubits.len(), 1);
+	assert_eq!(circ.qubits[0], Qubit::default());
     }
 
 }
