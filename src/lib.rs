@@ -13,8 +13,8 @@ use num::complex::Complex;
 
 use types::Qubit;
 use types::Circuit;
+use types::Entangle;
 use gate::CGate;
-
 
 /// Measure a qubit.
 /// Change its state after the measure has occured.

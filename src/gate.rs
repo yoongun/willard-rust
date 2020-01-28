@@ -91,7 +91,10 @@ pub fn sqrt_not(qubit: &mut Qubit) {
 
 /// Implementation of the CNOT gate
 /// Equivalent for the CX gate
-pub fn cnot(circ: Circuit, src: i32, dest: i32) {
+pub fn cnot(&mut circ: Circuit, dest: i32, src: i32) {
+    ent = Entangle{pair: (dest, src), gate: CGate::CNOT};
+    circ.ents.push(ent);
+
     return;
 }
 
