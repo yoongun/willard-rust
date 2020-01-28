@@ -1,67 +1,15 @@
 extern crate rand;
 extern crate num;
 
+pub mod gate;
+pub mod alg;
+pub mod types;
+
 use std::f32;
 use rand::Rng;
 use num::complex::Complex;
+use types::Qubit;
 
-pub mod gate;
-pub mod alg;
-
-/// # Data struct of the qubit
-///
-/// Contains the complex value of the alpha and beta
-/// to express the superposition and the phase of the qubit
-pub struct Qubit{
-    state: (Complex<f32>, Complex<f32>),
-}
-
-impl Default for Qubit {
-    /// Define the default states of the qubit as |0>
-    fn default() -> Qubit {
-	Qubit{state: (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0))}
-    }
-}
-
-pub struct Qucrumb {
-    bits: [Qubit; 2],
-}
-
-impl Default for Qucrumb {
-    /// Define the default states of the qucrumb as |00>
-    fn default() -> Qucrumb {
-	Qucrumb{bits: [Qubit::default(), Qubit::default()]}
-    }
-}
- 
-impl Qucrumb {
-    /// Define the initialization of the qucrumb with two qubit
-    fn new(fst: Qubit, snd: Qubit) -> Qucrumb {
-	Qucrumb{bits: [fst, snd]};
-    }
-
-    /// Calculate the state based on its values
-    fn state(&self) -> [Complex<f32>; 4] {
-	let mut ret: [Complex<f32>; 4] = [
-	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	];
-
-	let bit1 = [self.bits[0].state.0, self.bits[0].state.1];
-	let bit2 = [self.bits[1].state.0, self.bits[1].state.1];
-
-	for n in 0..3 {
-	    let bit_list = [
-		(n & 1),
-		(n & 2) >> 1
-	    ];
-	    ret[n] = bit1[bit_list[0]] * bit2[bit_list[1]];
-	}
-	return ret;
-    }
-}
 
 /// Measure a qubit.
 /// Change its state after the measure has occured.
@@ -83,45 +31,6 @@ fn measure(qubit: &mut Qubit) -> u32 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use num::complex::Complex;
-
-    #[test]
-    fn test_qubit_init() {
-	let qubit = Qubit::default();
-
-	assert_eq!(qubit.state, (Complex{re: 1.0, im: 0.0}, Complex{re: 0.0, im: 0.0}));
-    }
-
-    #[test]
-    fn test_qucrumb_init() {
-	// Test to intializae default
-	let qucrumb1 = Qucrumb::default();
-
-	let got = qucrumb1.state;
-	let want = [
-	    Complex::new(1.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	];
-	assert_eq!(got, want);
-
-	// Test to initilize with the existing qubits 
-	let qubit1 = Qubit::default();
-	let mut qubit2 = Qubit::default();
-	gate::x(&mut qubit2);
-
-	let qucrumb2 = Qucrumb::new(qubit1, qubit2); 
-
-	let got = qucrumb2.state;
-	let want = [
-	    Complex::new(0.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	    Complex::new(1.0, 0.0),
-	    Complex::new(0.0, 0.0),
-	];
-	assert_eq!(got, want);
-    }
 
     #[test]
     fn test_collapes_of_state() {
