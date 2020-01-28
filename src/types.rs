@@ -1,6 +1,5 @@
 use num::complex::Complex;
 use std::vec::Vec;
-use std::string::String;
 
 
 /// # Data struct of the qubit
@@ -12,7 +11,7 @@ pub struct Qubit{
 }
 
 pub struct Circuit{
-    pub mut qubits: Vec<Qubit>,
+    pub qubits: Vec<(Qubit, i32)>,
 }
 
 impl Default for Qubit {
@@ -24,10 +23,15 @@ impl Default for Qubit {
 
 impl Default for Circuit {
     fn default() -> Circuit {
-	Circuit{qubits: Vec::new()};
+	Circuit{qubits: Vec::new()}
     }
 }
 
+impl Circuit {
+    fn add(&mut self, qubit: Qubit, idx: i32) {
+	self.qubits.push((qubit, idx));
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -43,13 +47,16 @@ mod tests {
 
     #[test]
     fn test_add_qubit_to_circuti() {
-	let circ = Circuit::default();
+	let mut circ = Circuit::default();
 
 	let qubit = Qubit::default();
 	circ.add(qubit, 0);
 
 	assert_eq!(circ.qubits.len(), 1);
-	assert_eq!(circ.qubits[0], Qubit::default());
+	assert_eq!(circ.qubits[0].0.state,
+		   (Complex{re: 1.0, im: 0.0},
+		   Complex{re: 0.0, im: 0.0}));
+	assert_eq!(circ.qubits[0].1, 0);
     }
 
 }
