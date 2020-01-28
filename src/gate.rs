@@ -183,14 +183,18 @@ mod tests {
     #[test]
     fn test_cnot() {
 	for _n in 0..100 {
+	    let circ = Circuit::default();
 	    let mut q1 = Qubit::default();
 	    let mut q2 = Qubit::default();
 	    h(&mut q1);
 
-	    cnot(&mut q1, &mut q2);
+	    circ.add(q1, 0);
+	    circ.add(q2, 0);
 
-	    let want = measure(&mut q1);
-	    let got = measure(&mut q2);
+	    circ.cnot(0, 1);
+
+	    let want = measure(&mut circ.qubits[0].0);
+	    let got = measure(&mut circ.qubits[1].0);
 	    assert_eq!(got, want);
 	}
     }

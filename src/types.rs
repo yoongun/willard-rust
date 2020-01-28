@@ -28,7 +28,7 @@ impl Default for Circuit {
 }
 
 impl Circuit {
-    fn add(&mut self, qubit: Qubit, idx: i32) {
+    pub fn add(&mut self, qubit: Qubit, idx: i32) {
 	self.qubits.push((qubit, idx));
     }
 }
@@ -53,9 +53,8 @@ mod tests {
 	circ.add(qubit, 0);
 
 	assert_eq!(circ.qubits.len(), 1);
-	assert_eq!(circ.qubits[0].0.state,
-		   (Complex{re: 1.0, im: 0.0},
-		   Complex{re: 0.0, im: 0.0}));
+	assert_eq!(circ.qubits[0].0.state, (Complex{re: 1.0, im: 0.0},
+					    Complex{re: 0.0, im: 0.0}));
 	assert_eq!(circ.qubits[0].1, 0);
     }
 

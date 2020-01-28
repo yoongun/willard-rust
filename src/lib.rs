@@ -11,6 +11,7 @@ use std::f32;
 use rand::Rng;
 use num::complex::Complex;
 use types::Qubit;
+use types::Circuit;
 
 
 /// Measure a qubit.
