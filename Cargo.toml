@@ -12,3 +12,4 @@ license = "MIT"
 [dependencies]
 rand = "0.7"
 num = "0.2"
+approx = "0.3"

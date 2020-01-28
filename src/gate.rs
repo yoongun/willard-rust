@@ -84,34 +84,12 @@ pub fn cnot(qubit1: &mut Qubit, qubit2: &mut Qubit) {
 	       [0.0, 1.0, 0.0, 0.0],
 	       [0.0, 0.0, 0.0, 1.0],
 	       [0.0, 0.0, 1.0, 0.0]];
-    let mut qucrumb: [Complex<f32>; 4] = [
-	qubit1.state.0 * qubit2.state.0,
-	qubit1.state.1 * qubit2.state.0,
-	qubit1.state.0 * qubit2.state.1,
-	qubit1.state.1 * qubit2.state.1
-    ];
-
 
     return;
 }
 
 pub fn swap(dest: &mut Qubit, src: &mut Qubit) {
     return;
-}
-
-/// Normalize the phase to make the first value of the qubit
-/// in a real value
-fn normalize_phase(state: (Complex<f32>, Complex<f32>)) -> (f32, Complex<f32>) {
-    if (state.0 == Complex{re: 0.0, im: 0.0}) {
-	return (0.0, Complex::new(1.0, 0.0));
-    }
-
-    let size = (state.0.conj() * state.0).re.sqrt();
-    let d_phase = (state.0 / size).conj();
-
-    let l = (d_phase * state.0).re;
-    let r = d_phase * state.1;
-    (l, r)
 }
 
 #[cfg(test)]
@@ -217,12 +195,5 @@ mod tests {
     fn test_swap() {
     }
 
-    #[test]
-    fn test_normalize_phase() {
-	let state = (Complex::new(0.0, -1.0), Complex::new(1.0, 0.0));
-	let got = normalize_phase(state);
-	let want = (1.0, Complex::new(0.0, 1.0));
-	assert_eq!(got, want);
-    }
 }
 

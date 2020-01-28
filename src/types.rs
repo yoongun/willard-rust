@@ -16,10 +16,6 @@ impl Default for Qubit {
     }
 }
 
-pub struct Qucrumb {
-    bits: [Qubit; 2],
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
