@@ -3,8 +3,6 @@ extern crate approx;
 extern crate rand;
 extern crate num;
 
-// pub mod gate;
-// pub mod alg;
 pub mod types;
 
 use std::f32;
