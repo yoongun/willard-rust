@@ -6,6 +6,7 @@ extern crate num;
 pub mod gate;
 pub mod alg;
 pub mod types;
+pub mod num;
 
 use std::f32;
 use rand::Rng;

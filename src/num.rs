@@ -30,10 +30,11 @@ impl Qubyte {
 	let root_two = (2.0 as f32).sqrt();
 	let mat = [[1.0 / root_two, 1.0 / root_two],
 		    [1.0 / root_two, -1.0 / root_two]];
-	let mut state: (Complex<f32>, Complex<f32>)= (Complex::new(0.0, 0.0), Complex::new(0.0, 0.0));
 
-	state.0 = mat[0][0] * self.bits[idx].state.0 + mat[0][1] * self.bits[idx].state.1;
-	state.1 = mat[1][0] * self.bits[idx].state.0 + mat[1][1] * self.bits[idx].state.1;
+	let state = [
+	    mat[0][0] * self.bits[idx].state[0] + mat[0][1] * self.bits[idx].state[1],
+	    mat[1][0] * self.bits[idx].state[0] + mat[1][1] * self.bits[idx].state[1]
+	]
 
 	qubit.state = state;
     }
