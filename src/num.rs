@@ -29,3 +29,17 @@ impl Qubyte {
 
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use num::complex::Complex;
+
+    #[test]
+    fn test_init_qubyte() {
+    }
+
+    #[test]
+    fn test_apply_gate_to_qubit_in_qubyte() {
+    }
+}
+    
