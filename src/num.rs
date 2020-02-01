@@ -21,12 +21,26 @@ pub struct Qubyte {
 
 impl Default for Qubyte {
     fn default() -> Qubyte {
-	Qubyte{bits: [Qubit::default; 8]}
+	Qubyte{bits: [Qubit::default(); 8]}
     }
 }
 
 impl Qubyte {
-    fn h(&self, idx: i32) {
+    fn measure(&self, idx: usize) -> u32 {
+	let mut rng = rand::thread_rng();
+	let rn = rng.gen::<f32>();
+
+	let alpha_sq = (self.bits[idx].state[0].conj() * self.bits[idx].state[0]).re;
+
+	if rn < alpha_sq {
+	    self.bits[idx].state = [Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)];
+	    return 0;
+	}
+	self.bits[idx].state = [Complex::new(0.0, 0.0), Complex::new(1.0, 0.0)];
+	return 1;
+    }
+
+    fn h(&self, idx: usize) {
 	let root_two = (2.0 as f32).sqrt();
 	let mat = [[1.0 / root_two, 1.0 / root_two],
 		    [1.0 / root_two, -1.0 / root_two]];
@@ -34,9 +48,9 @@ impl Qubyte {
 	let state = [
 	    mat[0][0] * self.bits[idx].state[0] + mat[0][1] * self.bits[idx].state[1],
 	    mat[1][0] * self.bits[idx].state[0] + mat[1][1] * self.bits[idx].state[1]
-	]
+	];
 
-	qubit.state = state;
+	self.bits[idx].state = state;
     }
 
     fn x(&self) {
@@ -62,9 +76,10 @@ mod tests {
     fn test_collapse_of_state() {
 	let qubyte = Qubyte::default();
 	qubyte.h(0);
+
 	let want = qubyte.measure(0);
 	for _n in 0..100 {
-	    let got = qubyte.maasure(0);
+	    let got = qubyte.measure(0);
 	    assert_eq!(got, want);
 	}
     }
