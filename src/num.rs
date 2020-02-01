@@ -8,7 +8,9 @@ struct Qubit {
 
 
 impl Default for Qubit {
-
+    fn default() -> Qubit {
+	Qubit{state: (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0))}
+    }
 }
 
 
@@ -18,9 +20,12 @@ pub struct Qubyte {
 
 
 impl Default for Qubyte {
-
+    fn default() -> Qubyte {
+	Qubyte{bits: [Qubit::default; 8]}
+    }
 }
 
 impl Qubyte {
+
 }
 
