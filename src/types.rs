@@ -99,6 +99,16 @@ mod tests {
 
     #[test]
     fn test_cnot_gate() {
+	for _n in 0..100 {
+	    let mut qubyte = Qubyte::default();
+	    qubyte.h(0);
+
+	    qubyte.cnot(1, [0]);
+
+	    let want = qubyte.measure(0);
+	    let got = qubyte.measure(1);
+	    assert_eq!(got, want);
+	}
     }
 }
     
