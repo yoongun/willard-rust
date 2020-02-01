@@ -3,13 +3,13 @@ use num::complex::Complex;
 
 
 struct Qubit {
-    pub state: (Complex<f32>, Complex<f32>),
+    pub state: [Complex<f32>; 2],
 }
 
 
 impl Default for Qubit {
     fn default() -> Qubit {
-	Qubit{state: (Complex::new(1.0, 0.0), Complex::new(0.0, 0.0))}
+	Qubit{state: [Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)]}
     }
 }
 
@@ -26,7 +26,29 @@ impl Default for Qubyte {
 }
 
 impl Qubyte {
+    fn h(&self, idx: i32) {
+	let root_two = (2.0 as f32).sqrt();
+	let mat = [[1.0 / root_two, 1.0 / root_two],
+		    [1.0 / root_two, -1.0 / root_two]];
+	let mut state: (Complex<f32>, Complex<f32>)= (Complex::new(0.0, 0.0), Complex::new(0.0, 0.0));
 
+	state.0 = mat[0][0] * self.bits[idx].state.0 + mat[0][1] * self.bits[idx].state.1;
+	state.1 = mat[1][0] * self.bits[idx].state.0 + mat[1][1] * self.bits[idx].state.1;
+
+	qubit.state = state;
+    }
+
+    fn x(&self) {
+    }
+
+    fn y(&self) {
+    }
+
+    fn z(&self) {
+    }
+
+    fn cnot(&self) {
+    }
 }
 
 #[cfg(test)]
@@ -36,15 +58,7 @@ mod tests {
 
 
     #[test]
-    fn test_h_gate() {
-	let qubyte = Qubyte::default();
-
-	qubyte.h(0);
-    }
-
-    #[test]
     fn test_collapse_of_state() {
-	// Prepare the qubyte and the qubit
 	let qubyte = Qubyte::default();
 	qubyte.h(0);
 	let want = qubyte.measure(0);
@@ -52,18 +66,6 @@ mod tests {
 	    let got = qubyte.maasure(0);
 	    assert_eq!(got, want);
 	}
-    }
-
-    #[test]
-    fn test_x_gate() {
-    }
-
-    #[test]
-    fn test_y_gate() {
-    }
-
-    #[test]
-    fn test_z_gate() {
     }
 
     #[test]
