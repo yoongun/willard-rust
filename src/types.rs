@@ -1,4 +1,5 @@
 use crate::*;
+use std::fmt;
 use num::complex::Complex;
 
 
@@ -16,6 +17,7 @@ impl Default for Qubit {
 
 pub struct Qubyte {
     bits: [Qubit; 8],
+    ents: 
 }
 
 
@@ -31,6 +33,12 @@ impl Default for Qubyte {
 	    Qubit::default(),
 	    Qubit::default(),
 	]}
+    }
+}
+
+impl fmt::Display for Qubyte {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Not implemented")
     }
 }
 
@@ -71,7 +79,7 @@ impl Qubyte {
     fn z(&self) {
     }
 
-    fn cnot(&self) {
+    fn cnot(&mut self) {
     }
 }
 
