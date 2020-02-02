@@ -17,7 +17,6 @@ impl Default for Qubit {
 
 pub struct Qubyte {
     bits: [Qubit; 8],
-    ents: 
 }
 
 
@@ -38,7 +37,9 @@ impl Default for Qubyte {
 
 impl fmt::Display for Qubyte {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Not implemented")
+	for bit in &self.bits {
+	    write!(f, "Not implemented")
+	}
     }
 }
 

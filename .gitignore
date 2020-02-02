@@ -7,3 +7,6 @@ Cargo.lock
 *~
 .\#*
 \#*
+
+# Scripts
+run_docker.sh
