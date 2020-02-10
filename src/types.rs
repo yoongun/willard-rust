@@ -1,5 +1,4 @@
 use crate::*;
-use std::fmt;
 use num::complex::Complex;
 
 
@@ -16,32 +15,16 @@ impl Default for Qubit {
 
 
 pub struct Qubyte {
-    bits: [Qubit; 8],
+    bits: [Complex<f32>; 256],
 }
 
 
 impl Default for Qubyte {
     fn default() -> Qubyte {
-	Qubyte{bits: [
-	    Qubit::default(),
-	    Qubit::default(),
-	    Qubit::default(),
-	    Qubit::default(),
-	    Qubit::default(),
-	    Qubit::default(),
-	    Qubit::default(),
-	    Qubit::default(),
-	]}
+
     }
 }
 
-impl fmt::Display for Qubyte {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-	for bit in &self.bits {
-	    write!(f, "Not implemented")
-	}
-    }
-}
 
 impl Qubyte {
     fn measure(&mut self, idx: usize) -> u32 {
@@ -59,16 +42,6 @@ impl Qubyte {
     }
 
     fn h(&mut self, idx: usize) {
-	let root_two = (2.0 as f32).sqrt();
-	let mat = [[1.0 / root_two, 1.0 / root_two],
-		    [1.0 / root_two, -1.0 / root_two]];
-
-	let state = [
-	    mat[0][0] * self.bits[idx].state[0] + mat[0][1] * self.bits[idx].state[1],
-	    mat[1][0] * self.bits[idx].state[0] + mat[1][1] * self.bits[idx].state[1]
-	];
-
-	self.bits[idx].state = state;
     }
 
     fn x(&self) {
@@ -112,7 +85,7 @@ mod tests {
 	    let mut qubyte = Qubyte::default();
 	    qubyte.h(0);
 
-	    qubyte.cnot(1, [0]);
+	    // qubyte.cnot(1, [0]);
 
 	    let want = qubyte.measure(0);
 	    let got = qubyte.measure(1);
